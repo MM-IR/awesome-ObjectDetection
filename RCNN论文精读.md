@@ -9,6 +9,8 @@ region-proposals with CNN所以被当作是RCNN
 
 3.一堆class-specific线性SVMs.
 
+![](RCNN.png)
+
 ### 训练阶段（multi-stage training）
 1.Domain-specific finetuning: 这里就是将原始的CNN的ImageNet的全连接层是随机初始化的。(1000-way classification layer变成N+1-way classification layer. 其中N是number of object类，然后还有一个是对应的background。
 那么这里我们就是使用selective search获得了一堆region proposals，然后使用与ground truth:IoU大于等于0.5来将bbx标记为positive，其余是negative。然后每次训练CNN参数的时候我们都是使用32正windows和96个bg windows。（mini-batch）。
