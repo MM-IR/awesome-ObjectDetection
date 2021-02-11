@@ -11,6 +11,9 @@
 
 3.更准确。
 
+# RoI Pooling成立的一个条件
+就是咱们的卷积层都加上了一个pad=1.这样的话只有pooling层会对其产生影响。
+
 ## 总结: 之前方法的缺陷
 
 ### compared with RCNN:
