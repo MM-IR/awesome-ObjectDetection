@@ -1,6 +1,6 @@
 Idea来自spatial pyramid matching or SPM.
 
-SPPnet取得了102x faster than RCNN方法的速度。
+SPPnet取得了102x faster than RCNN方法的速度。SPP和RCNN已经不一样了，我们不再是所有的都输入，而是直接提取feature map啦+然后SPP+然后FC
 
 ## 我们主要就是针对为什么CNN网络需要fixed-size输入的问题，我们就是在cnn中的最后一层CNN使用一个SPP layer，然后将其输入至全连接层。
 SPP使用的就是multi-level spatial bins。
