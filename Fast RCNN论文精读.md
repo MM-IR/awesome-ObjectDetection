@@ -40,4 +40,14 @@ Fast-RCNN就是说comparatively fast to训练以及测试～
 4.对于特征缓存没有任何disk storage是需要的。feature caching。
 
 ## Fast R-CNN架构以及训练方式
-1.网络
+1.网络就是输入entire image作为输入以及a set of object proposals。
+
+1）conv feature map。
+
+2）对于每个object proposal，我们都是ROI Pooling产生fixed-size feature vectors。
+
+3）最后的FC不一样，每个feature vector都会输入至序列级别的全连接层@这个会划分为两个sibling output layers：
+-一个就是K+1的softmax layer（1表示catch-all‘background’ class；
+-一个就是4 real-valued numbers for each of the K object classes.
+
+![](FastRCNN-details.png)
