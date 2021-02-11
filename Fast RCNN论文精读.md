@@ -54,3 +54,32 @@ Fast-RCNN就是说comparatively fast to训练以及测试～
 -一个就是4 real-valued numbers for each of the K object classes.
 
 ![](FastRCNN-details.png)
+
+## 1.RoI pooling layer@core（a special case of spp layer）
+这层的核心目的就是max pooling将每个ROI的feature转化为小的feature map with a fixed spatial extent of (H x W): 比如7x7.
+
+那么这里的H和W是超参数，和任何的RoI无关。RoI的定义方式就是一个four-tuple(r,c,h,w),top-left corner(r,c) and its height and width(h,w).
+
+feature map中的一个矩形区域就是ROI。
+
+ROI max pooling的核心就是divide整个图像划分成HxW个grid，具体的划分矩形大小由我们所决定，然后使用maxpooling。
+
+## 2.Initialize from 预训练网络。（ROI pooling就是修改
+我们实验了3个预训练的ImageNet的网络，每个都有5个max pooling layers并且有5-13个卷积层。
+
+我们这里就是修改了3种transformations。
+
+1.last max pooling layer就是replaced by a RoI pooling layer@这里的H和W就是完全和最后一层全连接层所匹配的，那么就可以使用finetuning了。
+
+2.然后修改最后的一层全连接层+softmax。这里使用两个sibling layer@@～。
+
+3.网络这里就是修改好使用两种data inputs:1)a list of images;2)a list of RoIs.
+
+## 3.Fine-tuning for detection.
+这里为什么SPP是那样的inefficient when each training sample comes from a 不同的image。这里就是each RoI 可能都是来自于一个非常大的receptive field。often spanning the entire input image，因为forward pass必须处理整个receptive field，训练输入是大的。
+
+
+
+
+
+
