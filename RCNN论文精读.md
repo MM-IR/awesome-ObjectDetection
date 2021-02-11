@@ -35,3 +35,6 @@ region-proposals with CNN所以被当作是RCNN
 2.当然如果能改进CNN的finetuning说不定是一个改进整个套路的过程。
 
 ### 当然这里我们也使用了回归器。
+
+### 测试detection
+这里的核心就是我们对于每张测试图像使用selective search获取大约2000个region proposals，然后我们warp each proposal并且使用CNN来获取对应的特征。然后对于每个class，我们使用SVM来进行score的ranking。然后对于每个class，我们使用NMS来抑制掉IoU overlap with a higher scoring region的proposal。
